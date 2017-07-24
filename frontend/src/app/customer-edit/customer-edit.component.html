@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Customer</title>
+</head>
+<body>
+<form #f="ngForm" novalidate>
+<div class="form-group row">
+  <label for="lastName" class="col-2 col-form-label">Name</label>
+  <div class="col-10">
+    <input [(ngModel)]="customerInfo.lastName" required name="lastName" placeholder="Set a new name..." class="form-control" type="text" id="lastName">
+  </div>
+  <span *ngIf="f?.controls?.lastName?.hasError('required')" class="help-block">This field is required.</span>
+</div>
+<div class="form-group row">
+  <label for="firstName" class="col-2 col-form-label">First Name</label>
+  <div class="col-10">
+    <input [(ngModel)]="customerInfo.firstName" required name="firstName" placeholder="Set a new first name..." class="form-control" type="text" id="firstName">
+  </div>
+  <span *ngIf="f?.controls?.firstName?.hasError('required')" class="help-block">This field is required.</span>
+</div>
+<div class="form-group row">
+  <label for="email" class="col-2 col-form-label">E-mail</label>
+  <div class="col-10">
+    <input [(ngModel)]="customerInfo.email" required name="email" placeholder="Set a new E-mail address..." class="form-control" type="text" id="email">
+  </div>
+  <span *ngIf="f?.controls?.email?.hasError('required')" class="help-block">This field is required.</span>
+</div>
+<div class="form-group row">
+  <label for="birthday" class="col-2 col-form-label">Birthday</label>
+  <div class="col-10">
+    <input [(ngModel)]="customerInfo.birthDate" required name="birthDate"  placeholder="Set a new birthdate..." class="form-control" type="date" id="birthday">
+  </div>
+  <span *ngIf="f?.controls?.birthDate?.hasError('required')" class="help-block">This field is required.</span>
+</div>
+<div class="form-group row">
+  <label for="address" class="col-2 col-form-label">Address</label>
+  <div class="col-10">
+    <input [(ngModel)]="customerInfo.address" required name="address" placeholder="Set a new address..." class="form-control" type="text" id="address">
+  </div>
+  <span *ngIf="f?.controls?.address?.hasError('required')" class="help-block">This field is required.</span>
+</div>
+<div class="form-group row">
+  <label for="phoneNumber" class="col-2 col-form-label">Phone Number</label>
+  <div class="col-10">
+    <input [(ngModel)]="customerInfo.phoneNumber" required name="phoneNumber" placeholder="Set a new phone number..." class="form-control" type="text" id="phoneNumber">
+  </div>
+  <span *ngIf="f?.controls?.phoneNumber?.hasError('required')" class="help-block">This field is required.</span>
+</div>
+<div class="form-group row">
+  <label for="driverLicenseNumber" class="col-2 col-form-label">Driver License Number</label>
+  <div class="col-10">
+    <input [(ngModel)]="customerInfo.driverLicenseNumber" required name="driverLicenseNumber" placeholder="Set a new driver license number..." class="form-control" type="text" id="driverLicenseNumber">
+  </div>
+  <span *ngIf="f?.controls?.driverLicenseNumber?.hasError('required')" class="help-block">This field is required.</span>
+</div>
+  <!--
+<div class="form-group row">
+  <label for="password" class="col-2 col-form-label">Set New Password (Optional)</label>
+  <div class="col-10">
+    <input [(ngModel)]="newPassword" name="password" placeholder="Set a new password (optional)..." class="form-control" type="password" id="password">
+  </div>
+</div>
+-->
+  <button [disabled]="!f.valid" class="btn btn-lg btn-primary btn-block" (click)="editCustomer()" type="submit">Submit</button>
+  <button class="btn btn-lg btn-danger btn-block" routerLink="/home" type="reset">Cancel</button>
+
+</form>
+
+</body>
+</html>

@@ -1,0 +1,19 @@
+<div style="padding:20px; margin-bottom: 20px; height: 200px;"
+     [ngStyle]="{'background-color': (selectedItem == item) ?  'orange' : item.color }">
+
+  <h2>{{item.brand}} {{item.model}}</h2>
+  <p>Kilometers: {{item.kilometers}}</p>
+  <p>Gastype: {{item.gasType}}</p>
+  <p>Seats: {{item.seatNumber}}</p>
+
+  <p>
+    <input type="button"
+           value="Choose"
+           class="btn btn-default"
+           (click)="select()"
+            style="position:absolute;bottom:25px; right:20px;"/>
+
+    <!--<a class="btn btn-default" [routerLink]="['/car-edit', item.id, {expertMode: false}]">Editieren</a>-->
+
+  </p>
+</div>

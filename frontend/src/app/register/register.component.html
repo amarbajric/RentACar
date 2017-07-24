@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+</head>
+<body>
+
+
+<div class="container">
+  <div class="row main">
+    <div class="panel-heading">
+      <div class="panel-title text-center">
+        <h1 class="title">Create Account</h1>
+        <hr />
+      </div>
+    </div>
+    <div class="main-login main-center">
+      <!-- ALERT -->
+      <div *ngIf="(message)" [ngClass]="(success)? 'alert-success show' : 'alert alert-danger show'" class="alert step" role="alert">
+        {{message}}
+      </div>
+      <!-- ALERT END -->
+      <form #f="ngForm" class="form-horizontal" novalidate>
+
+        <div class="form-group">
+          <label for="firstName" class="cols-sm-2 control-label">Your Name</label>
+          <div class="cols-sm-10">
+            <div class="input-group">
+              <span [ngStyle]="{'background-color': (f?.controls?.firstName?.valid && f?.controls?.lastName?.valid)? 'green' : ''}" class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+              <input [(ngModel)]="firstName" minlength="2" required type="text" class="form-control" name="firstName" id="firstName"  placeholder="Enter your Name"/>
+              <input [(ngModel)]="lastName" minlength="2" required type="text" class="form-control" name="lastName" id="lastName"  placeholder="Enter your last Name"/>
+            </div>
+          </div>
+          <span *ngIf="f?.controls?.firstName?.hasError('minlength') || f?.controls?.lastName?.hasError('minlength')" class="help-block">Error. Please check your first and last name.</span>
+        </div>
+
+
+        <div class="form-group">
+          <label for="email" class="cols-sm-2 control-label">Your Email</label>
+          <div class="cols-sm-10">
+            <div class="input-group">
+              <span [ngStyle]="{'background-color': (f?.controls?.email?.valid)? 'green' : ''}" class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+              <input [(ngModel)]="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}" required type="email" class="form-control" name="email" id="email"  placeholder="Enter your Email"/>
+            </div>
+          </div>
+          <span *ngIf="f?.controls?.email?.hasError('pattern')" class="help-block">The format of the email address is invalid!</span>
+        </div>
+
+
+        <div class="form-group">
+          <label for="birthday" class="cols-sm-2 control-label">Your Birthday</label>
+          <div class="cols-sm-10">
+            <div class="input-group">
+              <span [ngStyle]="{'background-color': (f?.controls?.birthday?.valid)? 'green' : ''}" class="input-group-addon"><i class="fa fa-birthday-cake fa" aria-hidden="true"></i></span>
+              <input [(ngModel)]="birthday" required type="date" class="form-control" name="birthday" id="birthday"  placeholder="Enter your Birthday"/>
+            </div>
+          </div>
+          <span *ngIf="f?.controls?.birthday?.hasError('required')" class="help-block">This field is required!</span>
+        </div>
+
+
+        <div class="form-group">
+          <label for="driverLicense" class="cols-sm-2 control-label">Your Driver License Number</label>
+          <div class="cols-sm-10">
+            <div class="input-group">
+              <span [ngStyle]="{'background-color': (f?.controls?.driverLicense?.valid)? 'green' : ''}" class="input-group-addon"><i class="fa fa-credit-card fa"></i></span>
+              <input [(ngModel)]="driverLicenseNumber" minlength="11" required type="text" class="form-control" name="driverLicense" id="driverLicense"  placeholder="Enter your driver license number"/>
+            </div>
+          </div>
+          <span *ngIf="f?.controls?.driverLicense?.hasError('minlength')" class="help-block">This field is required!</span>
+        </div>
+
+        <div class="form-group">
+          <label for="address" class="cols-sm-2 control-label">Your Address</label>
+          <div class="cols-sm-10">
+            <div class="input-group">
+              <span [ngStyle]="{'background-color': (f?.controls?.address?.valid)? 'green' : ''}" class="input-group-addon"><i class="fa fa-location-arrow fa" aria-hidden="true"></i></span>
+              <input [(ngModel)]="address" required type="text" class="form-control" name="address" id="address"  placeholder="Type in your address"/>
+            </div>
+          </div>
+          <span *ngIf="f?.controls?.address?.hasError('required')" class="help-block">This field is required!</span>
+        </div>
+
+        <div class="form-group">
+          <label for="phoneNumber" class="cols-sm-2 control-label">Your Phone Number</label>
+          <div class="cols-sm-10">
+            <div class="input-group">
+              <span [ngStyle]="{'background-color': (f?.controls?.phoneNumber?.valid)? 'green' : ''}" class="input-group-addon"><i class="fa fa-phone fa" aria-hidden="true"></i></span>
+              <input [(ngModel)]="phoneNumber" required type="number" class="form-control" name="phoneNumber" id="phoneNumber"  placeholder="Type in your phone number"/>
+            </div>
+          </div>
+          <span *ngIf="f?.controls?.phoneNumber?.hasError('required')" class="help-block">The phone number is invalid (Too short)!</span>
+        </div>
+
+        <div class="form-group">
+          <label for="password" class="cols-sm-2 control-label">New Password</label>
+          <div class="cols-sm-10">
+            <div class="input-group">
+              <span [ngStyle]="{'background-color': (f?.controls?.password?.valid)? 'green' : ''}" class="input-group-addon"><i class="fa fa-user-secret fa" aria-hidden="true"></i></span>
+              <input [(ngModel)]="password" required type="password" class="form-control" name="password" id="password"  placeholder="Type in your desired password"/>
+            </div>
+          </div>
+          <span *ngIf="f?.controls?.password?.hasError('required')" class="help-block">This field is required!</span>
+        </div>
+
+
+        <div class="form-group ">
+          <button [disabled]="!f.valid" type="submit" class="btn btn-primary btn-lg btn-block login-button" (click)="save()" >Register</button>
+        </div>
+        <div class="login-register">
+          <a [routerLink]="['/login']">Login</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+</body>
+</html>

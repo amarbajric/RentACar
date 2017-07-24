@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>404</title>
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="error-template">
+        <h1>Oops!</h1>
+        <img src="../../img/404.jpg">
+        <div class="error-actions">
+          <a *ngIf="!isLoggedIn" routerLink="/login" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-log-in"></span> Go to Login</a>
+          <a *ngIf="isLoggedIn" routerLink="/home" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-home"></span> Go back Home</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

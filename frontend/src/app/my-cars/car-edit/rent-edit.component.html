@@ -1,0 +1,33 @@
+<h1>Car Edit!</h1>
+<div>
+  {{ message }}
+</div>
+<div *ngIf="car">
+  <div class="form-group">
+    <label>Brand</label>
+    <input [(ngModel)]="car.brand" class="form-control" readonly>
+  </div>
+  <div class="form-group">
+    <label>Model</label>
+    <input [(ngModel)]="car.model" class="form-control" readonly>
+  </div>
+  <div class="form-group">
+    <label>Kilometers</label>
+    <input [(ngModel)]="car.kilometers" class="form-control"  readonly>
+  </div>
+  <div class="form-group">
+    <label>Bonus Milse</label>
+    <input [(ngModel)]="car.color" class="form-control" readonly >
+  </div>
+</div>
+<div *ngIf="rentedCar">
+  <div class="form-group">
+    <label>Leasetime</label>
+    <input [(ngModel)]="rentedCar.leaseTime" class="form-control">
+  </div>
+</div>
+  <div class="form-group">
+    <button (click)="save()" class="btn btn-default" [routerLink]="['/my-cars']">Save</button>
+
+  </div>
+

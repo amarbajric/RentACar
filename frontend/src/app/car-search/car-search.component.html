@@ -1,0 +1,89 @@
+<h1>Search Cars</h1>
+
+
+<div *ngIf="(success)" [ngClass]="(success)? 'alert-success show' : 'alert alert-danger show'" class="alert step" role="alert">
+  Car was successfully rented!
+</div>
+
+  <div class = "form-group">
+    <select #selectedValue (change)="selectedValue.value">
+      <option>All</option>
+      <option value="Brand">Brand</option>
+      <option value="Model">Model</option>
+      <option value="SeatNumber">Seatnumber</option>
+      <option value="Transmission">Transmission</option>
+      <option value="GasType">Gastype</option>
+    </select>
+  </div>
+
+  <div [hidden]="selectedValue.value == 'GasType' || selectedValue.value == 'Transmission' || selectedValue.value == 'All'" class = "form-group">
+  <input [(ngModel)]="searchValue"
+         [type]="(selectedValue.value == 'SeatNumber')? 'number' : 'text'"
+         class="form-control"
+         placeholder="Search for {{selectedValue.value}}..."
+         name="searchValue">
+  </div>
+
+  <div [hidden]="selectedValue.value !== 'GasType'" class = "form-group">
+    <select [(ngModel)]="searchValue">
+      <option value="Benzin">Benzin (Petrol)</option>
+      <option value="Diesel">Diesel</option>
+    </select>
+  </div>
+
+  <div [hidden]="selectedValue.value !== 'Transmission'" class = "form-group">
+    <select [(ngModel)]="searchValue">
+      <option value="Manual">Manual</option>
+      <option value="Automatic">Automatic</option>
+    </select>
+  </div>
+
+
+  <div class="form-group">
+    <button class="btn btn-primary btn-success" [disabled]="selectedValue.value == 'All'" (click)="search(selectedValue.value)">Filter</button> <button
+    class="btn btn-primary btn-info" [disabled]="selectedValue.value !== 'All'" (click)="findAll()">Show all</button>
+  </div>
+
+  <table  class="table table-striped table-bordered">
+  <tr>
+    <td><b>Brand</b></td>
+    <td><b>Model</b></td>
+    <td><b>Kilometers</b></td>
+    <td><b>Seatnumber</b></td>
+    <td><b>Gastype</b></td>
+    <td><b>Horsepower</b></td>
+    <td><b>Transmission</b></td>
+    <td><b>Color</b></td>
+    <td><b>Action</b></td>
+  </tr>
+  <tr *ngFor="let c of cars" [ngStyle]="{'background-color': (c == selectedCar) ? 'lightblue' : ''}">
+    <td>{{c.brand}}</td>
+    <td>{{c.model}}</td>
+    <td>{{c.kilometers}}</td>
+    <td>{{c.seatNumber}}</td>
+    <td>{{c.gasType}}</td>
+    <td>{{c.horsePower}}</td>
+    <td>{{c.transmission.charAt(0) | uppercase}}{{c.transmission.slice(1)}} </td>
+    <td  [ngStyle]="{'background-color': c.color}"></td>
+    <td><button class="btn" (click)="select(c)">Rent Car</button></td>
+  </tr>
+
+    <div *ngIf="cars.length < 1">
+     No Entries found! Please change the filter!
+    </div>
+
+</table>
+
+<div *ngIf="selectedCar" class="input-group car-search-prompt col-md-4">
+  <label>Leasetime:</label>
+  <form #f="ngForm" novalidate>
+  <input [(ngModel)]="leaseTime"
+         name="leaseTime"
+         id="leaseTime"
+         pattern="^[1-9][0-9]*$"
+         required
+         type="number"/> <label>Day(s)</label>
+  <button [disabled]="!f.valid" class="btn btn-primary btn-success" (click)="rent(selectedCar, leaseTime)">Rent</button>
+  </form>
+  <span *ngIf="f?.controls?.leaseTime?.hasError('pattern')">Lease time cannot be zero!</span>
+</div>
